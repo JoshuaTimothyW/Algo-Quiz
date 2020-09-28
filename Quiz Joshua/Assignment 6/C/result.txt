@@ -1,0 +1,5 @@
+Query #1: 5
+Query #2: 3
+Query #3: 2
+Query #4: 1
+Query #5: 0

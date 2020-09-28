@@ -1,0 +1,41 @@
+1. add employee
+not accept the same name and add to leftmost data
+
+2. change position
+change position cannot exchanged the empty one, first employee is the highest salary (last index)
+
+3. resign
+delete employee data and position will be blank (can be used again)
+
+4. retire
+place and position saved and may not be used by oher employees	
+
+input
+
+input N process
+
+1. process number, name, gender, division
+2. process number, employee 1 index, employee 2 index
+3. process number, index of resigned employee
+4. process number, index of retired employee
+
+
+in test case, array will be like:
+
+after add employee:
+Bibi, Lili, Jojo
+
+after input 2 1 2 :
+Bibi, Jojo, Lili
+
+after input 3 2:
+Bibi, Jojo 
+
+after input 4 1:
+Jojo retired
+
+after add Joli:
+Joli, Jojo, Bibi
+
+output:
+Joli, Bibi

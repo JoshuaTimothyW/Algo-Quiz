@@ -1,0 +1,77 @@
+vital variabel = max_user, index
+variabel yang lain bisa dibikin sesuai soal: kaya char list_name[1000][51], long long list_pajak[1000], dst
+
+1. fitur add:
+
+Input:
+- pilih formulir (1770 s/1770 ss/1770)
+- tahun pelaporan pajak (4 digit)
+- penghasilan setahun (if 1770 s minimal 60jt / if 1770 ss max 60 jt)
+- options (npwp or not)
+- if npwp, input tahun pendaftaran npwp (4 digit) dan bulan pendaftaran (1-12)
+- nama (5-50 char)
+- jenis harta (tunai,tabugnan,giro,deposito) bisa pilih 4"-nya
+
+Perhitungan pph npwp
+
+if penghasilan <= 50 jt :
+	pajak = 0.05 * penghasilan
+else if penghasilan > 50 jt && penghasilan <= 250 jt :
+	pajak = (0.05 * 50 jt) + (0.15 * ( penghasilan - 50 jt ))
+else if penghasilan > 250 jt && penghasilan <= 500 jt :
+	pajak = (0.05 * 50 jt) + (0.15 * 200 jt) + (0.25 * ( penghasilan - 250 jt ))
+else if penghasilan > 500 jt :
+	pajak = (0.05 * 50 jt) + (0.15 * 200 jt) + (0.25 * 250 jt) + (0.3 * ( penghasilan - 500 jt ))
+
+if npwp :
+
+	non npwp sebanyak N-bulan = (bulan_daftar - 1) * (pajak/12) * 1.2
+	npwp sebanyak N-bulan = (bulan_daftar - 1) * (pajak/12)
+	selisih = non npwp - npwp
+
+	if tahun_pajak == tahun_npwp :
+		pajak = non npwp + (12-bulan_daftar+1) * (pajak/12)
+	else if tahun_pajak == tahun_npwp+1 :
+		pajak = pajak - selisih
+
+else :
+	pajak = pajak * 1.2
+
+set masing" array sesuai inputan di index ke max_user, cth:
+
+list_pajak[max_user] = pajak; // integer or long integer
+strcpy(list_name[max_user],name); // string
+
+jgn lupa max_user ditambah 1: 
+
+max_user++;
+
+2. Update
+view data user dulu, trs pilih data sesuai nomor (boleh pakai variable index)
+
+kurangin satu: index--;
+
+sisanya sama kaya fitur add (tingga copas), bedanya:
+kalo di add -> list_pajak[max_user] = pajak;
+kalo di update -> list_pajak[index] = pajak;
+
+3. Delete
+view data user dulu, trs pilih data sesuai nomor (boleh pakai variable index)
+
+kurangin satu: index--;
+
+trs looping mulai dr index yg dipilih td:
+
+for(int i=index;i<max_user;i++){
+	...
+}
+
+di dalem for, pindahin data dari index ke-n+1 jd ke-n:
+
+list_pajak[i] = list_pajak[i+1];
+strcpy(list_name[i],list_name[i+1]);
+
+kalo uda, max_user dikurang 1: max_user--;
+
+4. View data
+Bebas tampilannya kaya gimana, ikutin di soal

@@ -1,0 +1,71 @@
+7
+1
+Jojo
+Laki - laki
+HRD
+1
+Lili
+Perempuan
+Management
+1
+Bibi
+Perempuan
+Accounting
+2 1 2
+3 2
+4 1
+1
+Joli
+Laki - laki
+HRD
+
+
+6
+1
+Jojo
+Laki - laki
+HRD
+1
+Lili
+Perempuan
+Management
+1
+Bibi
+Perempuan
+Accounting
+4 2
+4 0
+1
+Joli
+Laki - laki
+HRD
+
+output: Joli, [Bibi], Lili, [Jojo]
+
+
+
+8
+1
+Jojo
+Laki - laki
+HRD
+1
+Lili
+Perempuan
+Management
+1
+Bibi
+Perempuan
+Accounting
+4 2
+4 0
+1
+Joli
+Laki - laki
+HRD
+3 2
+1
+Joshua
+Laki - laki
+HRD
+output: Joshua, [Bibi], Joli, [Jojo]
