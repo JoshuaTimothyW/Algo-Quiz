@@ -1,31 +1,38 @@
 #include <stdio.h>
-#define ll long long int
+#define ui long long unsigned int
 
-ll arr[41];
-
-ll joequ(ll x){
-	
-	if(arr[x] != -1){
-		return arr[x];
-	}
-	
-	arr[x] = 2*x + joequ(x-1) + joequ(x-2);
-	return arr[x];
-}
+ui arr[1502];
 
 int main(){
 	
-	ll n;
+	ui t,k,n;
+	ui sum1, sum2,factor,diff;
 	
-	for(int i=0;i<=41;i++){
-		arr[i] = -1;
+	scanf("%llu",&t);
+	
+	for(int i=1;i<=t;i++){
+		scanf("%llu %llu",&k,&n);
+		factor=n;
+		sum1=sum2=diff=0;
+		for(int j=1;j<=k;j++){
+			scanf("%llu",&arr[j]);
+			if(j == factor){
+				sum1+=arr[j];
+				factor+=n;
+			}else{
+				sum2+=arr[j];
+			}
+		}
+		
+		diff = sum2-sum1;
+		
+		if(diff < 0){
+			diff *= -1;
+		}
+		
+		printf("Case #%d: %llu\n",i,diff);
 	}
 	
-	arr[0] = 0;	
-	arr[1] = 1;
-	
-	scanf("%lld",&n);
-	printf("%lld\n",joequ(n));
 	
     return 0;
 }

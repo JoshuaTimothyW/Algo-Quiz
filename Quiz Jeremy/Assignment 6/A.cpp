@@ -1,33 +1,25 @@
 #include <stdio.h>
-#define ll long long int
-
-ll arr[41];
-
-ll joque(ll x){
-	if(arr[x] != -1){
-		return arr[x];
-	}
-	
-	arr[x] = joque(x-2)+joque(x-1)+1;
-	return arr[x];
-}
+#include <string.h>
 
 int main(){
 	
-	ll t,n;
-	
-	scanf("%lld",&t);
-	
-	for(int i=0;i<=41;i++){
-		arr[i] = -1;
-	}
-	
-	arr[0] = 2;
-	arr[1] = 1;
+	int t, n;
+
+	scanf("%d",&t);
 	
 	for(int i=1;i<=t;i++){
-		scanf("%lld",&n);
-		printf("Case #%d: %lld\n",i,joque(n));
+	
+		char dst[1000],src[1000],temp[1000];
+		
+		scanf("%d %s %s",&n,src,dst); getchar();
+		
+		for(int j=2;j<=n;j++){
+			strcpy(temp,dst);
+			strcat(dst,src);
+			strcpy(src,temp);
+		}
+		
+		printf("Case #%d: %s\n",i,dst);
 	}
 	
     return 0;

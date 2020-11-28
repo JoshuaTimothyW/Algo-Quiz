@@ -1,42 +1,29 @@
 #include <stdio.h>
 
-int arr[15];
-
-int pow(int x,int y){
-	if(arr[y] != -1){
-		return arr[y];
-	}
-	
-	arr[y] = x*pow(x,y-1);
-	
-	return arr[y];
-}
-
 int main(){
+	int t,n,arr[26],count;
+	char s[100001];
 	
-	int n,max,space;
+	scanf("%d",&t); getchar();
 	
-	scanf("%d",&n);
-	
-	for(int i=0;i<15;i++){
-		arr[i] = -1;
-	}
-	
-	arr[0] = 1;
-
-	for(int i=n,j=1;i>0;i--,j++){
-		space = pow(2,j-1)-1;
-		max = pow(2,i)-1;
-		
-		for(int a=0;a<max;a++){
-			for(int b=0;b<space;b++){
-				printf(" ");
-			}
-			printf("*");
+	for(int a=1;a<=t;a++){
+		count=0;
+		n=0;
+		while(s[n-1] != '\n'){
+			scanf("%c",&s[n]);
+			arr[s[n]-97]++;
+			n++;
 		}
-		printf("\n");
+		
+		for(int i=0;i<26;i++){
+			if(arr[i] > 0){
+				count++;
+				arr[i]=0;
+			}
+		}
+		
+		printf("Case #%d: %d\n",a,count);
 	}
-	
     return 0;
 }
     

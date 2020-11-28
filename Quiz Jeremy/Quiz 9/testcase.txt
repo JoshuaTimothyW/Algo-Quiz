@@ -1,0 +1,7 @@
+Case C:
+Sample Input:
+=========
+2
+A7 E7
+A1 B3
+=========
