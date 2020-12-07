@@ -15,39 +15,53 @@ void swap(struct Book *x,struct Book *y){
 	*y = temp; 
 }
 
-void check(int index1, int index2){
+int compare(int index1, int index2){
 	
-	ll diff_id = list_book[index2].id - list_book[index1].id;
-	ll diff_title = strcmp(list_book[index2].title,list_book[index1].title);
-	ll diff_user = list_book[index2].user - list_book[index1].user;
+	int str = strcmp(list_book[index2].title,list_book[index1].title);
 	
-	if( diff_id < 0 ){
-		swap(&list_book[index1],&list_book[index2]);
-		return;
+	if( list_book[index1].id != list_book[index2].id ){
+    	return list_book[index1].id < list_book[index2].id;
 	}
-	else if( diff_id == 0 && diff_title < 0 ){
-		swap(&list_book[index1],&list_book[index2]);
-		return;
+	
+	if( str != 0 ){
+		return str;
 	}
-	else if( diff_id+diff_title == 0 && diff_user < 0 ){
-		swap(&list_book[index1],&list_book[index2]);
-		return;
-	}
+	
+	return list_book[index1].user < list_book[index2].user;
 }
 
-void sort(ll n){ 
-	for(int i=0;i<(n-1);i++){
-		for(int j=0;j<(n-(i+1));j++){
-			check(j,j+1); 	
-		} 
-	} 
-}
+int check (int start, int end) 
+{ 
+    int i = (start - 1);
+  
+    for (int j = start; j <= end- 1; j++) 
+    {         
+       if( compare(j,end) > 0 ){
+       	i++;
+		swap(&list_book[i],&list_book[j]);
+	   }
+    }
+	 
+    swap(&list_book[i + 1], &list_book[end]); 
+    
+	return (i + 1); 
+} 
+  
+void order_book(int start, int end) 
+{ 
+    if (start < end) 
+    { 
+        int pi = check(start, end); 
+  
+        order_book(start, pi - 1); 
+        order_book(pi + 1, end); 
+    } 
+} 
+
 
 void display(ll n){
 	for(int i=0;i<n;i++){
-		if( list_book[i].user == 2 ){
-			printf("%d\n",i+1);	
-		}
+		printf("%d %s %d\n",list_book[i].id,list_book[i].title,list_book[i].user);
 	} 
 }
 
@@ -55,7 +69,7 @@ int main(){
 	
 	ll t,n,a,b;
 	
-	scanf("%lld",&t);
+	scanf("%lld",&t); getchar();
 	
 	for(int i=1;i<=t;i++){
 		scanf("%lld",&a); getchar();
@@ -74,10 +88,14 @@ int main(){
 			list_book[j].user = 2;
 		}
 		
-		sort(n);
-		
 		printf("Case #%d:\n",i);
-		display(n);
+		order_book(0,n-1);
+		
+		for(int j=0;j<n;j++){
+			if( list_book[j].user == 2 ){
+				printf("%d\n",j+1);	
+			}	
+		} 
 	}
 	
     return 0;

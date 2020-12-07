@@ -1,6 +1,12 @@
 #include <stdio.h>
 #define ll long long int
 
+struct Command{
+	int hack;
+	int start;
+	int end;
+}command[151];
+
 struct Salary{
 	ll sal1;
 	ll sal2;
@@ -18,15 +24,15 @@ void swap(int index1,int index2){
 	list_employee[index2].sal = temp; 
 }
 
-void left_shift(int index){
-	ll temp = list_employee[index].sal.sal1;
-	list_employee[index].sal.sal1 = list_employee[index].sal.sal2;
-	list_employee[index].sal.sal2 = list_employee[index].sal.sal3;
-	list_employee[index].sal.sal3 = temp;
+void shift(int index){
+	ll temp = list_employee[index].sal.sal3;
+	list_employee[index].sal.sal3 = list_employee[index].sal.sal2;
+	list_employee[index].sal.sal2 = list_employee[index].sal.sal1;
+	list_employee[index].sal.sal1 = temp;
 }
 
 void hack1(int start, int end){
-	while(start <= end){
+	while(start < end){
 		swap(start,end);
 		start++;
 		end--;
@@ -35,26 +41,25 @@ void hack1(int start, int end){
 
 void hack2(int start, int end){
 	while(start <= end){
-		left_shift(start);
+		shift(start);
 		start++;
 	}
 }
 
 void display(ll n){
 	for(int i=0;i<n;i++){
-		printf("%s %lld\n",list_employee[i].name,list_employee[i].sal.sal3);
+		printf("%s %lld %lld %lld\n",list_employee[i].name,list_employee[i].sal.sal1,list_employee[i].sal.sal2,list_employee[i].sal.sal3);
 	}
 }
 
 int main(){
 	
-	ll t,n,q;
-	ll hack,start,end;
+	int t,n,q,hack,start,end;
 	
-	scanf("%lld",&t); getchar();
+	scanf("%d",&t); 
 	
 	for(int i=1;i<=t;i++){
-		scanf("%lld %lld",&n,&q); getchar();
+		scanf("%d %d",&n,&q); 
 		
 		for(int j=0;j<n;j++){
 			scanf("%s %lld %lld %lld"
@@ -66,17 +71,21 @@ int main(){
 		}
 		
 		for(int j=0;j<q;j++){
-			scanf("%lld %lld %lld",&hack,&start,&end); getchar();
-			
-			if(hack == 1){
-				hack1(start-1,end-1);
+			scanf("%d %d %d",&command[j].hack,&command[j].start,&command[j].end); 
+		}
+		
+		for(int j=q-1;j>=0;j--){
+			if(command[j].hack == 1){
+				hack1(command[j].start-1,command[j].end-1);
 			}else{
-				hack2(start-1,end-1);
+				hack2(command[j].start-1,command[j].end-1);
 			}
 		}
 		
 		printf("Case #%d:\n",i);
-		display(n);
+		for(int i=0;i<n;i++){
+			printf("%s %lld\n",list_employee[i].name,list_employee[i].sal.sal3);
+		}
 	}
 	
     return 0;
