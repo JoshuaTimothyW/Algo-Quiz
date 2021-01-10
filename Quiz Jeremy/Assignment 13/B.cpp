@@ -1,6 +1,8 @@
 #include <stdio.h>
 
-int arr[100001];
+int arr[101];
+
+int max=-1;
 
 void swap(int *x,int *y){ 
 	int temp = *x; 
@@ -35,8 +37,7 @@ void sort(int start,int end) {
 	}
 }
 
-
-int search(int x, int n){
+int search(int n,int x){
 	
 	int start=0,end=n-1,mid;
 	
@@ -50,15 +51,15 @@ int search(int x, int n){
 		
 		mid = (start+end)/2;
 		
-		if(arr[mid] == x){
-			return mid+1;
+		if( arr[mid] == x ){
+			return mid;
 		}
-		
-		if(arr[mid] < x){
-			start = mid+1;
-		}else{
-			end = mid-1;
-		}
+		 
+        if ( arr[mid] < x ) { 
+            start = mid+1;
+      	}else { 
+            end = mid-1;
+        }     
 	}
 	
 	return -1;
@@ -66,9 +67,9 @@ int search(int x, int n){
 
 int main(){
 	
-	int n,q,x;
+	int n,m,num,index,gap;
 	
-	scanf("%d",&n);
+	scanf("%d %d",&n,&m);
 	
 	for(int i=0;i<n;i++){
 		scanf("%d",&arr[i]);
@@ -76,13 +77,24 @@ int main(){
 	
 	sort(0,n-1);
 	
-	scanf("%d",&q);
-	
-	for(int i=0;i<q;i++){
-		scanf("%d",&x);
-		printf("%d\n",search(x,n));
+	for(int i=0;i<m;i++){
+		scanf("%d",&num);
+		index = search(n,num);
+		
+		while(index > -1){
+			for(int i=index;i<n-1;i++){
+				arr[i] = arr[i+1];
+			}
+			n--;
+			index = search(n,num);
+		}
 	}
 	
+	if(n > 0){
+		max = arr[n-1];	
+	}
+	
+	printf("Maximum number is %d\n",max);
 	
     return 0;
 }
