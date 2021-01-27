@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int main () {
+	long long int num, m;
+	scanf("%lld %lld", &num, &m);
+	long long int nilai[num], total[m], tampung[num];
+	for(int i = 0 ; i < num ; i++) {
+		scanf("%lld", &nilai[i]);
+	}
+	for(int i = 0 ; i < m ; i++) {
+		scanf("%lld", &total[i]);
+	}
+	tampung[0] = nilai[0];
+	for(int i = 1 ; i < num ; i++) {
+		if(tampung[i-1] > nilai[i]) {
+			tampung[i] = nilai[i];
+		} else {
+			tampung[i] = nilai[i-1];
+		}
+	}
+	for(int i = 0 ; i < m ; i++) {
+		long long int left = 0, right = num-1, flag = 0, min = 100001;
+		if(tampung[right] > total[i]) {
+			puts("-1");
+		} else {
+			while(left <= right) {
+				long long int mid = (left+right) / 2;
+				if(tampung[mid] <= total[i]) {
+					if(min > mid) {
+						min = mid;
+					}
+					right = mid-1;
+				} else {
+					left = mid+1;
+				}
+			}
+			printf("%lld\n", min+1);
+		}
+	}
+	return 0;
+}

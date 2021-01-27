@@ -1,49 +1,21 @@
 #include <stdio.h>
 
-struct Message{
-	char msg;
-	int index;
-}msg[101];
-
-void swap(struct Message *x,struct Message *y){ 
-	struct Message temp = *x; 
-	*x = *y; 
-	*y = temp; 
-}
-
-void sort(int n){ 
-
-	for(int i=0;i<(n-1);i++){
-		for(int j=0;j<(n-(i+1));j++){
-			if( msg[j].index > msg[j+1].index ){
-				swap(&msg[j],&msg[j+1]); 
-			} 	
-		} 
-	} 
-}
-
 int main(){
 	
-	int n,index;
+	int n,arr[101];
 	
-	scanf("%d",&n); getchar();
+	char str[101];
 	
-	index=0;
+	scanf("%d",&n);
 	
-	do{
-		scanf("%c",&msg[index].msg);
-		index++;
-	}while(index < n);
-	
+	scanf("%[^\n]",str);
 	
 	for(int i=0;i<n;i++){
-		scanf("%d",&msg[i].index);
+		scanf("%d",&arr[i]);
 	}
 	
-	sort(n);
-	
 	for(int i=0;i<n;i++){
-		printf("%c",msg[i].msg,msg[i].index);
+		printf("%c",str[arr[i]-1]);
 	}
 	printf("\n");
 	
