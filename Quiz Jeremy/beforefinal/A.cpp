@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <string.h>
 
-struct Station{
-	char id[21];
+struct Destiny{
 	char src[101];
 	char dst[101];
+}temp;
+
+struct Station{
+	char id[21];
 	char time[6];
+	Destiny station;	
 }arr[1001];
 
 char id[21];
@@ -16,31 +20,14 @@ void swap(Station *x,Station *y){
 	*y = temp; 
 }
 
-void sort(int start,int end) {
-	int i,j;
-	
-	if(start < end){
-		i = start;  j = end;
-		
-		do{
-			do{ 
-				i=i+1;
-			} while( strcmp(arr[i].id,arr[start].id) < 0 );
-			
-			do{
-				j=j-1;
-			} while( strcmp(arr[j].id,arr[start].id) > 0 );
-			
-			if(i < j){
-				swap(&arr[i],&arr[j]);
-			}
-			
-		}while(i <= j);
-	
-	    swap(&arr[start],&arr[j]);
-	    sort(start,j-1);
-	    sort(j+1,end);
-	}
+void sort(int n) {
+	for(int i=0;i<(n-1);i++){
+		for(int j=0;j<(n-(i+1));j++){
+			if( strcmp(arr[j].id,arr[j+1].id) > 0 ){
+				swap(&arr[j],&arr[j+1]); 
+			} 	
+		} 
+	} 
 }
 
 int search(int n){
@@ -76,17 +63,20 @@ int main(){
 		scanf("%s %s",arr[i].id,arr[i].time); getchar();
 	}
 	
-	sort(0,t);
+	sort(t);
 	
 	for(int i=0;i<t;i++){
-		scanf("%s ",id);
+		scanf("%s %s %s",id,temp.src,temp.dst); getchar();
 		index = search(t);
-		scanf("%s %s",arr[index].src,arr[index].dst); getchar();
-		printf("%s\n",index);
+		
+		if(index > -1){
+			arr[index].station = temp;
+		}
 	}
 	
 	for(int i=0;i<t;i++){
-		printf("%s %s %s %s\n",arr[i].id,arr[i].time,arr[i].src,arr[i].dst);
+		printf("%s %s",arr[i].id,arr[i].time);
+		printf(" %s %s\n",arr[i].station.src,arr[i].station.dst);
 	}
 		
     return 0;
