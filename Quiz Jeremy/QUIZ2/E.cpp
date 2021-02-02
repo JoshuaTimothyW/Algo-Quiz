@@ -1,90 +1,73 @@
 #include <stdio.h>
+#define ll long long int
 
-struct Array{
-	int value;
+struct Number{	
+	ll num;
 	int index;
 }arr[100001];
 
-void swap(struct Array *x,struct Array *y){ 
-	struct Array temp = *x; 
-	*x = *y; 
-	*y = temp; 
+void swap(Number *a, Number *b){
+	Number temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
-void sort(int start,int end) {
-	int i,j;
-	
-	if(start < end){
-		i = start;  j = end+1;
-		
-		do{
-			do{ 
-				i=i+1;
-			} while(arr[i].value < arr[start].value);
-			
-			do{
-				j=j-1;
-			} while(arr[j].value > arr[start].value);
-			
-			if(i < j){
-				swap(&arr[i],&arr[j]);
+void sort(int n) {
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n-(i+1);j++){
+			if( arr[j].num > arr[j+1].num ){
+				swap(&arr[j],&arr[j+1]);
 			}
-			
-		}while(i <= j);
-	
-	    swap(&arr[start],&arr[j]);
-	    sort(start,j-1);
-	    sort(j+1,end);
+		}	
 	}
 }
 
-int search_max(int x, int n){
+int search(int n, ll x){
 	
-	int start=0,end=n-1,mid;
-	
-	if(x < arr[0].value){
-		return -1;
-	}
+	int start=0,end=n-1,mid,index=-1;
 	
 	while(start <= end){
 		
-		mid = (start+end)/2;
+		mid = start+(end-start+1)/2;
 		
-		if(arr[mid].value == x){
-			return mid;
-		}
-		
-		if( x < arr[mid].value ){
-			end = mid-1;
-		}else{
+		if( arr[mid].num < x ){
 			start = mid+1;
 		}
+		else if( arr[mid].num > x ){
+			end = mid-1;
+		}
+		else if( arr[mid].num == x ){
+			index = mid;
+			end = mid-1;
+		}
+		
 	}
 	
-	return start;
+	return (index > -1) ? arr[index].index+1 : -1;
 }
 
 void display(int n){
 	for(int i=0;i<n;i++){
-		printf("value: %d, index: %d\n",arr[i].value,arr[i].index);
+		printf("%lld at %d\n",arr[i].num,arr[i].index);
 	}
 }
 
 int main(){
 	
-	int n,m,x;
+	ll n,m,x;
 	
-	scanf("%d %d",&n,&m);
+	scanf("%lld %lld",&n,&m);
 	
 	for(int i=0;i<n;i++){
-		scanf("%d",&arr[i].value);
+		scanf("%d",&arr[i].num);
 		arr[i].index = i;
 	}
-	display(n);
+	
+	sort(n);
 	
 	for(int i=0;i<m;i++){
-		scanf("%d",&x);
-		printf("%d\n",search_max(x,n));
+		scanf("%lld",&x);
+		printf("%d\n",search(n,x));
 	}
 	
     return 0;
