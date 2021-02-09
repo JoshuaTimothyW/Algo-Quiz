@@ -1,10 +1,11 @@
 # Before Final
 
-Case A : "Jojo and Trains"
-Case B : "Mid-Year Gifts"
-Case C : "Domain Filtering"
-Case D : "Find the Word"
-Case E : "Company Dinner"
+- Case A : "Jojo and Trains"
+- Case B : "Mid-Year Gifts"
+- Case C : "Domain Filtering"
+- Case D : "Find the Word"
+- Case E : "Company Dinner"
+- Case H : "Bubble Shuffle"
 
 # Notes
 
@@ -22,3 +23,6 @@ Find the matched first letter in puzzle, check each letter at horizontal and ver
 
 - Case E : 
 Same as case C, find the first and last index, get the result by: [last index]-[first index]+1.
+
+- Case H :
+create 3 array : array A (ori), array B (permute), and list_index. compare each number from array A with array B, if the numbers are equal put the array A index in list_index, sort array list_index using bubble sort and count every swap in bubble sort logic. 

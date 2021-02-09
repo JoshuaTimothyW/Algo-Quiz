@@ -1,11 +1,11 @@
 # Assignment 13
 
-Case A : "Plant Sorting" 
-Case B : "Max Number"
-Case C : "Searching"
-Case D : "Binary Search"
-Case E : "Magic Potion"
-Case F : "Prime Triangle"
+- Case A : "Plant Sorting" 
+- Case B : "Max Number"
+- Case C : "Searching"
+- Case D : "Binary Search"
+- Case E : "Magic Potion"
+- Case F : "Prime Triangle"
 
 # Notes
 
